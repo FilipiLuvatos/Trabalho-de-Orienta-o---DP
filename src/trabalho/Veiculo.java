@@ -16,6 +16,17 @@ public class Veiculo {
         cor = null; 
 	}
     
+    public Veiculo(int x, int y, int velocidade, String cor, boolean fabrica) {
+        
+        
+		this.x = x;
+		this.y = y;
+		this.velocidade = velocidade;
+		this.cor = cor;
+		this.fabrica = fabrica;
+                
+	}
+    
     
 
     public void setX(int x) {

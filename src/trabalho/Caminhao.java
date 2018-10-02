@@ -1,11 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package trabalho;
 
+import java.util.Random;
 
-public class Caminhao {
+public class Caminhao extends Veiculo {
+    
+    Veiculo v = new Veiculo();
+    
+    public Caminhao (int x, int y, int velocidade, String cor, boolean fabrica) {
+		super(x, y, velocidade, cor, fabrica);
+	}
     
 }
