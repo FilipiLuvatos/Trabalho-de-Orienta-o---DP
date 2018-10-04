@@ -1,7 +1,5 @@
 package trabalho;
 
-import java.util.Random;
-
 public class Carro extends Veiculo {
     
     Veiculo v = new Veiculo();

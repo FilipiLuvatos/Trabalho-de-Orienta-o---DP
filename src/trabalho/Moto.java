@@ -1,7 +1,6 @@
 
 package trabalho;
 
-import java.util.Random;
 
 public class Moto extends Veiculo {
     

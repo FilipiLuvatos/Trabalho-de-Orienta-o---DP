@@ -1,6 +1,5 @@
 package trabalho;
 
-import java.util.Random;
 
 public class Caminhao extends Veiculo {
     
