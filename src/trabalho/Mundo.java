@@ -142,7 +142,10 @@ public class Mundo {
 	}
     
     public void desenhaMundo() {
-		String fabrica = "\u001B[35m" ;
+        
+        
+                String map = "\u001B[37m";
+                String fabrica = "\u001B[35m" ;
                 String limite = "\u001B[36m" ; 
 		String carroVermelho = "\u001B[31m";
                 String camiAmarelo = "\u001B[33m";
@@ -156,23 +159,23 @@ public class Mundo {
 					
 					
 					if(mapa[i][j] == 1) {
-						System.out.print("\u001b[42m \033[0m");
+						System.out.print(limite + "█");
 					}
 					else if(mapa[i][j] == 0) {
-						System.out.print(" ");
+						System.out.print(map + "█");
 					}
 					
 					else if(mapa[i][j] == 2) {
-						System.out.print("\u001b[42m \033[0m");
+						System.out.print(fabrica + "█");
 					}
 					else if(mapa[i][j] == 3){
-						System.out.print("\u001b[44m \033[0m");
+						System.out.print(carroVermelho + "█");
 					}
 					else if(mapa[i][j] == 4){
-						System.out.print("\u001b[43;1m \033[0m");
+						System.out.print(camiAmarelo + "█");
 					}
 					else if(mapa[i][j] == 5){
-						System.out.print("\u001b[41m \033[0m");
+						System.out.print(motoAzul + "█");
 					}
 					
 				}
