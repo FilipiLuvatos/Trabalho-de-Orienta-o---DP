@@ -187,9 +187,9 @@ public class Mundo {
 			System.out.print(carroVermelho + "█");
 			System.out.print(" Carros   ");
 			System.out.print(camiAmarelo + "█");
-			System.out.print(" Motos   ");
+			System.out.print(" Caminhão   ");
 			System.out.print(motoAzul + "█");
-			System.out.println(" Caminhoes");
+			System.out.println(" Motos");
 			
 			
 			for(int a = 0; a < car.size(); a++) {
@@ -215,7 +215,7 @@ public class Mundo {
 		}
 		
 		for (int i = 0; i < cao.size(); i ++) {
-			moto.get(i).moveCaminhao(cao.get(i));
+			cao.get(i).moveCaminhao(cao.get(i));
 		}
 		
 		for (int i = 0; i < moto.size(); i ++) {
