@@ -1,414 +1,374 @@
 /**
  * Mundo
- * Classe que gera mundo
- * 
+ * Classe que gera o mundo da simulacao.
+ *
  * @author Filipi de Luca Valim dos Santos
- * 
- * @see Mundo
  */
-
 package trabalho;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Mundo {
-    
-        /**
-	 * Instanciando a classe veículo
-	 */
-    
-    Veiculo v = new Veiculo();
-    
-        /**
-	 * Gerando ArrayList de cada um dos veículos
-	 */
-    
-        ArrayList <Carro> car = new ArrayList<>();///Carro
-	ArrayList <Caminhao> cao = new ArrayList<>();///Caminhão
-	ArrayList <Moto> moto = new ArrayList<>();///Moto
-    
-    
-    public int mapa[][] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-            	           {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            	           {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            		   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
-    
-    
-        /**
-	 * Função que gera veículos aleatóriamente
-	 */
-   public void geraVeiculos() {
-		for(int i = 0; i < 10; i++) {
-			car.add(new Carro((v.setX()+1), (v.setY()+1), 2, "verde", false));
-			while (mapa[car.get(i).getX()][car.get(i).getY()] == 2) {/**< Verificando se o carro foi gerado onde há uma fábrica, se sim, trocando-o */ 
-				car.get(i).setX();
-				car.get(i).setY();
-			}
 
-			cao.add(new Caminhao((v.setX()+1), (v.setY()+1), 1, "amarelo", false));
-			while (mapa[cao.get(i).getX()][cao.get(i).getY()] == 2) {
-				cao.get(i).setX();
-				cao.get(i).setY();
-			}
+    private static final int LINHAS = 30;
+    private static final int COLUNAS = 60;
+    private static final int LIMITE = 1;
+    private static final int VAZIO = 0;
+    private static final int FABRICA = 2;
+    private static final int CODIGO_CARRO = 3;
+    private static final int CODIGO_CAMINHAO = 4;
+    private static final int CODIGO_MOTO = 5;
 
-			moto.add(new Moto((v.setX()+1), (v.setY()+1), 3, "vermelho", false));
-			while (mapa[moto.get(i).getX()][moto.get(i).getY()] == 2) {
-				moto.get(i).setX();
-				moto.get(i).setY();
-			}
-		}		
-	}
-        /**
-	 * Função que reinicia o mapa, acabando com o rastro dos veículos
-	 */
-    
-    public void zeraMapa() {
-		for(int i = 0; i<30; i++) {
-			for(int j = 0; j < 60; j++) {
-				if(mapa[i][j] != 1 && mapa[i][j] != 2) {
-					mapa[i][j] = 0;
-				}
-			}
-		}
-                for (int a = 0; a < car.size(); a++) {
-			
-			int xcar = car.get(a).getX();                        
-			int ycar = car.get(a).getY();
-			
+    private static final String SIMBOLO_LIMITE = "#";
+    private static final String SIMBOLO_VAZIO = ".";
+    private static final String SIMBOLO_FABRICA = "F";
+    private static final String SIMBOLO_CARRO = "C";
+    private static final String SIMBOLO_CAMINHAO = "T";
+    private static final String SIMBOLO_MOTO = "M";
 
-			for(int i = 0; i<30; i++) {
-				for(int j = 0; j < 60; j++) {
-					if(i == xcar && j == ycar) {
-						if(mapa[i][j] == 2) {
-							mapa[i][j] = 2; 
-							
-						}
-						else {
-							mapa[i][j] = 3;
-						}
-					}
-				}
-			}
-		}
-                /**
-		 * Adicionando os novos veículos no mapa
-		 */
-		
-		for(int a  = 0; a < cao.size(); a++) {
-                    /// Obtendo as corrdenadas do veÃículo
-			int xcao = cao.get(a).getX();
-			int ycao = cao.get(a).getY();
-			
-			for(int i = 0; i<30; i++) {
-				for(int j = 0; j < 60; j++) {
-					if(i == xcao && j == ycao) {
-						if(mapa[i][j] == 2) {
-							mapa[i][j] = 2;
-							
-						}
-						else {
-							mapa[i][j] = 4;
-						}
-					}
-				}
-			}
-		}
-		
-		for(int a = 0; a < moto.size(); a ++) {
-			int xm = moto.get(a).getX();
-			int ym = moto.get(a).getY();
-			
-			for(int i = 0; i<30; i++) {
-				for(int j = 0; j < 60; j++) {
-					if(i == xm && j == ym) {
-						if(mapa[i][j] == 2) {
-							mapa[i][j] = 2;
-							
-						}
-						else {
-							mapa[i][j] = 5;
-						}
-					}
-				}
-			}	
-		}
-		
-	}
-        /**
-	 * Função que desenha o mundo
-	 */
-    
-    public void desenhaMundo() {
-        
-                /**
-		 * Variaveís que recebem o código da cor e auxíliam na hora de imprimir na tela
-		 */
-                String map = "\u001B[37m";///Código referente a cor WHITE
-                String fabrica = "\u001B[35m";///Código referente a cor MAGENTA
-                String limite = "\u001B[36m" ;///Código referente a cor CYAN 
-		String carroVermelho = "\u001B[31m";///Código referente a cor RED
-                String camiAmarelo = "\u001B[33m";///Código referente a cor YELLOW
-                String motoAzul = "\u001B[34m";///Código referente a cor BLUE
-                 /**
-		 * Contadores para exibição de veículos na tela
-		 */
-		int carros = 0;
-		int motos = 0;
-		int caminhoes = 0;
-		
-			for(int i = 0; i<30; i++) {
-				for(int j = 0; j < 60; j++) {
-					
-                                        /**
-					 * Desenhando o mapa 
-					 */
-					
-					if(mapa[i][j] == 1) {
-						System.out.print(limite + "█");
-					}
-					else if(mapa[i][j] == 0) {
-						System.out.print(map + "█");
-					}
-					
-					else if(mapa[i][j] == 2) {
-						System.out.print(fabrica + "█");
-					}
-					else if(mapa[i][j] == 3){
-						System.out.print(carroVermelho + "█");
-					}
-					else if(mapa[i][j] == 4){
-						System.out.print(camiAmarelo + "█");
-					}
-					else if(mapa[i][j] == 5){
-						System.out.print(motoAzul + "█");
-					}
-					
-				}
-				
-				System.out.println("");
-			}	
-			
-                         /**
-			 * Imprimindo a legenda
-			 */
-			
-			System.out.print(carroVermelho + "█");
-			System.out.print(" Carros   ");
-			System.out.print(camiAmarelo + "█");
-			System.out.print(" Caminhão   ");
-			System.out.print(motoAzul + "█");
-			System.out.println(" Motos");
-			
-                        /**
-			 * Contadores de veículos
-			 */
-			
-			for(int a = 0; a < car.size(); a++) {
-				carros++;
-			}
-			for(int a = 0; a < cao.size(); a++) {
-				caminhoes++;
-			}
-			for(int a = 0; a < moto.size(); a++) {
-				motos++;
-			}
-			
-		
-			System.out.println("Numero de Carros: " + carros);
-			System.out.println("Numero de Caminhoes: " + caminhoes);
-			System.out.println("Numero de Motos: " + motos);
-	}
-	
-	/**
-	 * Função que atualiza o mundo fazendo os veículos se moverem
-	 */
-	public void atualizaMundo() {
-		for(int i = 0; i < car.size(); i++) {
-			car.get(i).moveCarro(car.get(i));
-		}
-		
-		for (int i = 0; i < cao.size(); i ++) {
-			cao.get(i).moveCaminhao(cao.get(i));
-		}
-		
-		for (int i = 0; i < moto.size(); i ++) {
-			moto.get(i).moveMoto(moto.get(i));
-		}
-		
-		geraVeiculo();
-		detectaColisao();
-		zeraMapa();
-		desenhaMundo();
-	}
-	/**
-	 * Função que detecta colisão entre os veículos
-	 */
-	
-	public void detectaColisao() {
-		/// Colisão carro com carro
-		for (int i = 0; i < car.size(); i ++) {
-			for (int j = 0; j < car.size(); j++) {
-				if(car.get(j).getX() == car.get(i).getX() && car.get(j).getY() == car.get(i).getY()) {
-					if (i == j) { 
-						
-					}
-					else {
-						car.remove(car.get(i));
-					}	
-				}
-			}
-		}
-		/// Colisão caminhão com caminhão
-		
-		for (int i = 0; i < cao.size(); i ++) {
-			for (int j = 0; j < cao.size(); j++) {
-				if(cao.get(j).getX() == cao.get(i).getX() && cao.get(j).getY() == cao.get(i).getY()) {
-					if(i == j) {
-						
-					}
-					else {
-						cao.remove(cao.get(i));
-					}	
-				}
-			}
-		}
-		
-		/// Colisão moto com moto
-		for (int i = 0; i < moto.size(); i ++) {
-			for (int j = 0; j < moto.size(); j++) {
-				if(moto.get(j).getX() == moto.get(i).getX() && moto.get(j).getY() == moto.get(i).getY()) {
-					if(i == j) {
-						
-					}
-					else {
-						moto.remove(moto.get(i));
-					}	
-				}
-			}
-		}
-		
-		/// Colisão entre caminhão e carro
-		for(int i = 0; i < cao.size(); i++) {
-			for (int j = 0; j < car.size(); j++) {
-				if(car.get(j).getX() == cao.get(i).getX() && car.get(j).getY() == cao.get(i).getY()) {
-					if(cao.size() > car.size()) {
-						
-					}
-					else {
-						car.remove(car.get(j));
-					}
-				}
-			}
-		}
-		
-		/// Colisão entre caminhão e moto
-		for(int i = 0; i < cao.size(); i++) {
-			for (int j = 0; j < moto.size(); j++) {
-				if(moto.get(j).getX() == cao.get(i).getX() && moto.get(j).getY() == cao.get(i).getY()) {
-					if(cao.size() > moto.size()) {
-						
-					}
-					else {
-						moto.remove(moto.get(j));
-					}
-				}
-			}
-		}
-		
-		/// Colisão entre moto e carro
-		for(int i = 0; i < car.size(); i++) {
-			for (int j = 0; j < moto.size(); j++) {
-				if(moto.get(j).getX() == car.get(i).getX() && moto.get(j).getY() == car.get(i).getY()) {
-					if(car.size()>moto.size()) {
-						
-					}
-					else {
-						moto.remove(moto.get(i));
-					}
-					
-				}
-			}
-		}
-	}
-	
-	/**
-	 * Função que gera um veículo na fábricas quando o mesmo entra nela
-	 */
-	public void geraVeiculo() {
-		for(int a = 0; a < car.size(); a++) {
-			int x = car.get(a).getX();
-			int y = car.get(a).getY();
-				for(int i = 0; i < 30; i ++) {
-					for(int j = 0; j < 60; j++) {
-						if(i == x && j == y) {
-							if(mapa[i][j] == 2 && car.get(a).isFabrica() == false) {
-								car.get(a).setFabrica(true);///O veículo não gera mais um outro veículo se ele ja foi gerado antes 
-								car.add(new Carro((v.setX()+1), (v.setY()+1), 2, "verde", false));
-								}
-							}
-						}
-					}
-				}
-		
-		for(int a = 0; a < cao.size(); a++) {
-			int x = cao.get(a).getX();
-			int y = cao.get(a).getY();
-				for(int i = 0; i < 30; i ++) {
-					for(int j = 0; j < 60; j++) {
-						if(i == x && j == y) {
-							if(mapa[i][j] == 2 && cao.get(a).isFabrica() == false) {
-								cao.get(a).setFabrica(true);
-								cao.add(new Caminhao((v.setX()+1), (v.setY()+1), 1, "verde", false));
-								}
-							}
-						}
-					}
-				}
-		
-	
-		for(int a = 0; a < moto.size(); a++) {
-			int x = moto.get(a).getX();
-			int y = moto.get(a).getY();
-				for(int i = 0; i < 30; i ++) {
-					for(int j = 0; j < 60; j++) {
-						if(i == x && j == y) {
-							if(mapa[i][j] == 2 && moto.get(a).isFabrica() == false) {
-								moto.get(a).setFabrica(true);
-								moto.add(new Moto((v.setX()+1), (v.setY()+1), 3, "vermelho", false));
-							}
-						}
-					}
-				}
-		}
-	}
+    private final Veiculo geradorPosicao = new Veiculo();
+    private final ArrayList<Veiculo> veiculos = new ArrayList<>();
 
+    public int mapa[][] = {
+        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+    };
+
+    public void geraVeiculos() {
+        for (int i = 0; i < 10; i++) {
+            veiculos.add(criarVeiculoAleatorio(Carro.class));
+            veiculos.add(criarVeiculoAleatorio(Caminhao.class));
+            veiculos.add(criarVeiculoAleatorio(Moto.class));
+        }
+        zeraMapa();
     }
-    
-    
 
+    public void zeraMapa() {
+        for (int i = 0; i < LINHAS; i++) {
+            for (int j = 0; j < COLUNAS; j++) {
+                if (mapa[i][j] != LIMITE && mapa[i][j] != FABRICA) {
+                    mapa[i][j] = VAZIO;
+                }
+            }
+        }
+
+        for (int i = 0; i < veiculos.size(); i++) {
+            posicionaVeiculoNoMapa(veiculos.get(i));
+        }
+    }
+
+    public void desenhaMundo() {
+        limpaTela();
+
+        String map = "\u001B[37m";
+        String fabrica = "\u001B[35m";
+        String limite = "\u001B[36m";
+        String carroVermelho = "\u001B[31m";
+        String camiAmarelo = "\u001B[33m";
+        String motoAzul = "\u001B[34m";
+
+        for (int i = 0; i < LINHAS; i++) {
+            for (int j = 0; j < COLUNAS; j++) {
+                if (mapa[i][j] == LIMITE) {
+                    System.out.print(limite + SIMBOLO_LIMITE);
+                } else if (mapa[i][j] == VAZIO) {
+                    System.out.print(map + SIMBOLO_VAZIO);
+                } else if (mapa[i][j] == FABRICA) {
+                    System.out.print(fabrica + SIMBOLO_FABRICA);
+                } else if (mapa[i][j] == CODIGO_CARRO) {
+                    System.out.print(carroVermelho + SIMBOLO_CARRO);
+                } else if (mapa[i][j] == CODIGO_CAMINHAO) {
+                    System.out.print(camiAmarelo + SIMBOLO_CAMINHAO);
+                } else if (mapa[i][j] == CODIGO_MOTO) {
+                    System.out.print(motoAzul + SIMBOLO_MOTO);
+                }
+            }
+            System.out.println("");
+        }
+
+        System.out.print(carroVermelho + SIMBOLO_CARRO);
+        System.out.print(" Carros   ");
+        System.out.print(camiAmarelo + SIMBOLO_CAMINHAO);
+        System.out.print(" Caminhao   ");
+        System.out.print(motoAzul + SIMBOLO_MOTO);
+        System.out.println(" Motos");
+        System.out.print(fabrica + SIMBOLO_FABRICA);
+        System.out.print(" Fabricas   ");
+        System.out.print(limite + SIMBOLO_LIMITE);
+        System.out.println(" Limites");
+
+        System.out.println("Numero de Carros: " + contarPorTipo(Carro.class));
+        System.out.println("Numero de Caminhoes: " + contarPorTipo(Caminhao.class));
+        System.out.println("Numero de Motos: " + contarPorTipo(Moto.class));
+        System.out.print("\u001B[0m");
+    }
+
+    public void atualizaMundo() {
+        for (int i = 0; i < veiculos.size(); i++) {
+            moverVeiculo(veiculos.get(i));
+        }
+
+        geraVeiculo();
+        detectaColisao();
+        zeraMapa();
+        desenhaMundo();
+    }
+
+    public void detectaColisao() {
+        Set<String> posicoesComCarros = coletarPosicoes(Carro.class);
+        Set<String> posicoesComCaminhoes = coletarPosicoes(Caminhao.class);
+        Set<String> posicoesComMotos = coletarPosicoes(Moto.class);
+
+        Set<String> carrosRemovidos = coletarDuplicados(Carro.class);
+        Set<String> caminhoesRemovidos = coletarDuplicados(Caminhao.class);
+        Set<String> motosRemovidas = coletarDuplicados(Moto.class);
+
+        for (String posicao : posicoesComCaminhoes) {
+            if (!caminhoesRemovidos.contains(posicao)) {
+                carrosRemovidos.add(posicao);
+                motosRemovidas.add(posicao);
+            }
+        }
+
+        for (String posicao : posicoesComCarros) {
+            if (!carrosRemovidos.contains(posicao)) {
+                motosRemovidas.add(posicao);
+            }
+        }
+
+        Set<String> posicoesRemovidas = new HashSet<>();
+        posicoesRemovidas.addAll(carrosRemovidos);
+        posicoesRemovidas.addAll(caminhoesRemovidos);
+        posicoesRemovidas.addAll(motosRemovidas);
+
+        for (int i = veiculos.size() - 1; i >= 0; i--) {
+            Veiculo veiculo = veiculos.get(i);
+            if (deveRemover(veiculo, carrosRemovidos, caminhoesRemovidos, motosRemovidas, posicoesRemovidas)) {
+                veiculos.remove(i);
+            }
+        }
+    }
+
+    public void geraVeiculo() {
+        ArrayList<Veiculo> novosVeiculos = new ArrayList<>();
+
+        for (int i = 0; i < veiculos.size(); i++) {
+            Veiculo veiculo = veiculos.get(i);
+            if (ehFabrica(veiculo.getX(), veiculo.getY()) && !veiculo.isFabrica()) {
+                veiculo.setFabrica(true);
+                novosVeiculos.add(criarVeiculoAleatorio(veiculo.getClass()));
+            }
+        }
+
+        veiculos.addAll(novosVeiculos);
+    }
+
+    private void moverVeiculo(Veiculo veiculo) {
+        if (veiculo instanceof Carro) {
+            veiculo.moveCarro((Carro) veiculo);
+        } else if (veiculo instanceof Caminhao) {
+            veiculo.moveCaminhao((Caminhao) veiculo);
+        } else if (veiculo instanceof Moto) {
+            veiculo.moveMoto((Moto) veiculo);
+        }
+    }
+
+    private Veiculo criarVeiculoAleatorio(Class<? extends Veiculo> tipo) {
+        int[] posicao = sorteiaPosicaoLivre();
+
+        if (tipo == Carro.class) {
+            return new Carro(posicao[0], posicao[1], 2, "verde", false);
+        }
+        if (tipo == Caminhao.class) {
+            return new Caminhao(posicao[0], posicao[1], 1, "amarelo", false);
+        }
+        return new Moto(posicao[0], posicao[1], 3, "vermelho", false);
+    }
+
+    private int[] sorteiaPosicaoLivre() {
+        int x;
+        int y;
+
+        do {
+            x = geradorPosicao.sortearX() + 1;
+            y = geradorPosicao.sortearY() + 1;
+        } while (ehFabrica(x, y) || existeVeiculoNaPosicao(x, y));
+
+        return new int[]{x, y};
+    }
+
+    private boolean ehFabrica(int x, int y) {
+        return mapa[x][y] == FABRICA;
+    }
+
+    private boolean existeVeiculoNaPosicao(int x, int y) {
+        for (int i = 0; i < veiculos.size(); i++) {
+            Veiculo veiculo = veiculos.get(i);
+            if (veiculo.getX() == x && veiculo.getY() == y) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void posicionaVeiculoNoMapa(Veiculo veiculo) {
+        if (!ehFabrica(veiculo.getX(), veiculo.getY())) {
+            mapa[veiculo.getX()][veiculo.getY()] = codigoDoVeiculo(veiculo);
+        }
+    }
+
+    private int codigoDoVeiculo(Veiculo veiculo) {
+        if (veiculo instanceof Carro) {
+            return CODIGO_CARRO;
+        }
+        if (veiculo instanceof Caminhao) {
+            return CODIGO_CAMINHAO;
+        }
+        return CODIGO_MOTO;
+    }
+
+    private int contarPorTipo(Class<? extends Veiculo> tipo) {
+        int quantidade = 0;
+
+        for (int i = 0; i < veiculos.size(); i++) {
+            if (tipo.isInstance(veiculos.get(i))) {
+                quantidade++;
+            }
+        }
+
+        return quantidade;
+    }
+
+    private Set<String> coletarPosicoes(Class<? extends Veiculo> tipo) {
+        Set<String> posicoes = new HashSet<>();
+
+        for (int i = 0; i < veiculos.size(); i++) {
+            Veiculo veiculo = veiculos.get(i);
+            if (tipo.isInstance(veiculo)) {
+                posicoes.add(chavePosicao(veiculo.getX(), veiculo.getY()));
+            }
+        }
+
+        return posicoes;
+    }
+
+    private Set<String> coletarDuplicados(Class<? extends Veiculo> tipo) {
+        Set<String> posicoes = new HashSet<>();
+        Set<String> duplicados = new HashSet<>();
+
+        for (int i = 0; i < veiculos.size(); i++) {
+            Veiculo veiculo = veiculos.get(i);
+            if (tipo.isInstance(veiculo)) {
+                String posicao = chavePosicao(veiculo.getX(), veiculo.getY());
+                if (!posicoes.add(posicao)) {
+                    duplicados.add(posicao);
+                }
+            }
+        }
+
+        return duplicados;
+    }
+
+    private boolean deveRemover(
+        Veiculo veiculo,
+        Set<String> carrosRemovidos,
+        Set<String> caminhoesRemovidos,
+        Set<String> motosRemovidas,
+        Set<String> posicoesRemovidas
+    ) {
+        String posicao = chavePosicao(veiculo.getX(), veiculo.getY());
+
+        if (veiculo instanceof Carro) {
+            return carrosRemovidos.contains(posicao);
+        }
+        if (veiculo instanceof Caminhao) {
+            return caminhoesRemovidos.contains(posicao);
+        }
+        if (veiculo instanceof Moto) {
+            return motosRemovidas.contains(posicao);
+        }
+
+        return posicoesRemovidas.contains(posicao);
+    }
+
+    private String chavePosicao(int x, int y) {
+        return x + ":" + y;
+    }
+
+    private void limpaTela() {
+        System.out.print("\u001B[H\u001B[2J");
+        System.out.flush();
+    }
+
+    void limparVeiculosParaTeste() {
+        veiculos.clear();
+        zeraMapa();
+    }
+
+    void adicionarVeiculoParaTeste(Veiculo veiculo) {
+        veiculos.add(veiculo);
+    }
+
+    int quantidadeVeiculos() {
+        return veiculos.size();
+    }
+
+    int quantidadeVeiculos(Class<? extends Veiculo> tipo) {
+        return contarPorTipo(tipo);
+    }
+
+    boolean posicaoLivreParaTeste(int x, int y) {
+        return !ehFabrica(x, y) && !existeVeiculoNaPosicao(x, y);
+    }
+
+    boolean existeVeiculoEmFabricaParaTeste() {
+        for (int i = 0; i < veiculos.size(); i++) {
+            Veiculo veiculo = veiculos.get(i);
+            if (ehFabrica(veiculo.getX(), veiculo.getY())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    int quantidadePosicoesOcupadasParaTeste() {
+        Set<String> posicoes = new HashSet<>();
+
+        for (int i = 0; i < veiculos.size(); i++) {
+            Veiculo veiculo = veiculos.get(i);
+            posicoes.add(chavePosicao(veiculo.getX(), veiculo.getY()));
+        }
+
+        return posicoes.size();
+    }
+}
