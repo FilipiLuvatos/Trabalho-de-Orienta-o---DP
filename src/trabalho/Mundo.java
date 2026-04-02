@@ -8,6 +8,7 @@ package trabalho;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Mundo {
@@ -134,6 +135,11 @@ public class Mundo {
     }
 
     public void atualizaMundo() {
+        avancarSimulacao();
+        desenhaMundo();
+    }
+
+    public void avancarSimulacao() {
         for (int i = 0; i < veiculos.size(); i++) {
             moverVeiculo(veiculos.get(i));
         }
@@ -141,7 +147,23 @@ public class Mundo {
         geraVeiculo();
         detectaColisao();
         zeraMapa();
-        desenhaMundo();
+    }
+
+    public EstadoSimulacao criarEstado(int ciclo, boolean emExecucao) {
+        return new EstadoSimulacao(
+            ciclo,
+            emExecucao,
+            LINHAS,
+            COLUNAS,
+            construirGradeVisual(),
+            new EstatisticasSimulacao(
+                contarPorTipo(Carro.class),
+                contarPorTipo(Caminhao.class),
+                contarPorTipo(Moto.class),
+                veiculos.size()
+            ),
+            construirVeiculosSnapshot()
+        );
     }
 
     public void detectaColisao() {
@@ -323,6 +345,58 @@ public class Mundo {
 
     private String chavePosicao(int x, int y) {
         return x + ":" + y;
+    }
+
+    private String[][] construirGradeVisual() {
+        String[][] grade = new String[LINHAS][COLUNAS];
+
+        for (int i = 0; i < LINHAS; i++) {
+            for (int j = 0; j < COLUNAS; j++) {
+                if (mapa[i][j] == LIMITE) {
+                    grade[i][j] = "limite";
+                } else if (mapa[i][j] == VAZIO) {
+                    grade[i][j] = "vazio";
+                } else if (mapa[i][j] == FABRICA) {
+                    grade[i][j] = "fabrica";
+                } else if (mapa[i][j] == CODIGO_CARRO) {
+                    grade[i][j] = "carro";
+                } else if (mapa[i][j] == CODIGO_CAMINHAO) {
+                    grade[i][j] = "caminhao";
+                } else {
+                    grade[i][j] = "moto";
+                }
+            }
+        }
+
+        return grade;
+    }
+
+    private List<VeiculoSnapshot> construirVeiculosSnapshot() {
+        List<VeiculoSnapshot> itens = new ArrayList<>();
+
+        for (int i = 0; i < veiculos.size(); i++) {
+            Veiculo veiculo = veiculos.get(i);
+            itens.add(new VeiculoSnapshot(
+                tipoDoVeiculo(veiculo),
+                veiculo.getX(),
+                veiculo.getY(),
+                veiculo.getVelocidade(),
+                veiculo.getCor(),
+                veiculo.isFabrica()
+            ));
+        }
+
+        return itens;
+    }
+
+    private String tipoDoVeiculo(Veiculo veiculo) {
+        if (veiculo instanceof Carro) {
+            return "carro";
+        }
+        if (veiculo instanceof Caminhao) {
+            return "caminhao";
+        }
+        return "moto";
     }
 
     private void limpaTela() {

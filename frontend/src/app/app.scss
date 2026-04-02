@@ -1,0 +1,381 @@
+:host {
+  color: #f5efe1;
+  display: block;
+  min-height: 100vh;
+}
+
+.shell {
+  min-height: 100vh;
+  padding: 32px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 196, 97, 0.18), transparent 28%),
+    radial-gradient(circle at right, rgba(43, 130, 255, 0.2), transparent 30%),
+    linear-gradient(180deg, #16110e 0%, #211917 45%, #101720 100%);
+}
+
+.hero,
+.toolbar,
+.dashboard {
+  width: min(1360px, 100%);
+  margin: 0 auto;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 24px;
+}
+
+.eyebrow,
+.panel-label {
+  margin: 0 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  color: #f2a65a;
+}
+
+h1,
+h2,
+strong,
+button {
+  font-family: "Bahnschrift", "Segoe UI Variable Display", "Trebuchet MS", sans-serif;
+}
+
+h1 {
+  margin: 0;
+  max-width: 12ch;
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  line-height: 0.95;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.summary,
+.hero-status p,
+.legend-item p,
+.alert p,
+.vehicle-row {
+  color: #d8d3c8;
+}
+
+.summary {
+  margin: 12px 0 0;
+  max-width: 70ch;
+  line-height: 1.6;
+}
+
+.hero-status,
+.panel,
+.toolbar,
+.alert {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 19, 27, 0.78);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(14px);
+}
+
+.hero-status {
+  min-width: 240px;
+  border-radius: 24px;
+  padding: 20px;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 6px 12px;
+  margin-bottom: 12px;
+  background: rgba(255, 107, 107, 0.16);
+  color: #ff8b8b;
+  font-weight: 700;
+}
+
+.status-pill.running {
+  background: rgba(84, 214, 152, 0.16);
+  color: #8cf0b4;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-radius: 24px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+button {
+  border: 0;
+  border-radius: 14px;
+  padding: 12px 18px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #16110e;
+  background: linear-gradient(135deg, #f2a65a, #f7d08a);
+  cursor: pointer;
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+button.secondary {
+  background: linear-gradient(135deg, #8ac6ff, #c7e2ff);
+}
+
+button.ghost {
+  color: #f5efe1;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.alert,
+.loading-panel {
+  width: min(1360px, 100%);
+  margin: 0 auto 24px;
+  border-radius: 24px;
+  padding: 20px;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(280px, 0.9fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.panel {
+  border-radius: 28px;
+  padding: 24px;
+}
+
+.metrics {
+  grid-column: 1 / -1;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.metric-card {
+  border-radius: 22px;
+  padding: 18px;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.metric-card span {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.metric-card strong {
+  font-size: 2.3rem;
+}
+
+.metric-card.car {
+  background: linear-gradient(135deg, rgba(217, 79, 79, 0.22), rgba(217, 79, 79, 0.06));
+}
+
+.metric-card.truck {
+  background: linear-gradient(135deg, rgba(245, 180, 57, 0.22), rgba(245, 180, 57, 0.06));
+}
+
+.metric-card.moto {
+  background: linear-gradient(135deg, rgba(78, 157, 255, 0.22), rgba(78, 157, 255, 0.06));
+}
+
+.metric-card.total {
+  background: linear-gradient(135deg, rgba(123, 244, 167, 0.18), rgba(123, 244, 167, 0.05));
+}
+
+.map-panel {
+  overflow: hidden;
+}
+
+.map-grid {
+  display: grid;
+  gap: 1px;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.cell {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 3px;
+  min-width: 8px;
+}
+
+.cell::after {
+  content: attr(data-cell);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 0.5rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.cell.vazio {
+  background: rgba(231, 227, 214, 0.09);
+}
+
+.cell.limite {
+  background: #79b2ff;
+}
+
+.cell.fabrica {
+  background: #b27cff;
+}
+
+.cell.carro {
+  background: #d94f4f;
+}
+
+.cell.caminhao {
+  background: #f5b439;
+}
+
+.cell.moto {
+  background: #4e9dff;
+}
+
+.legend-list,
+.vehicle-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.legend-item,
+.vehicle-row {
+  display: grid;
+  gap: 12px;
+  border-radius: 18px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.legend-item {
+  grid-template-columns: 18px 1fr;
+}
+
+.legend-item strong,
+.vehicle-row span {
+  display: block;
+}
+
+.legend-item p {
+  margin: 4px 0 0;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.legend-swatch,
+.vehicle-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+}
+
+.legend-swatch {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+}
+
+.legend-swatch.carro,
+.vehicle-badge.carro {
+  background: #d94f4f;
+}
+
+.legend-swatch.caminhao,
+.vehicle-badge.caminhao {
+  background: #f5b439;
+}
+
+.legend-swatch.moto,
+.vehicle-badge.moto {
+  background: #4e9dff;
+}
+
+.legend-swatch.fabrica {
+  background: #b27cff;
+}
+
+.legend-swatch.limite {
+  background: #79b2ff;
+}
+
+.vehicle-row {
+  grid-template-columns: 110px 1fr 1fr 1fr;
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+.vehicle-badge {
+  min-width: 92px;
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #101720;
+}
+
+code {
+  font-family: "Consolas", "Courier New", monospace;
+}
+
+@media (max-width: 1100px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .vehicle-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .shell {
+    padding: 18px;
+  }
+
+  .hero {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cell::after {
+    font-size: 0.42rem;
+  }
+
+  .vehicle-row {
+    grid-template-columns: 1fr;
+  }
+}

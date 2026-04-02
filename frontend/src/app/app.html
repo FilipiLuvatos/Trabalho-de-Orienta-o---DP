@@ -1,0 +1,137 @@
+<main class="shell">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Trabalho de Orientacao</p>
+      <h1>Simulacao de veiculos em tempo real</h1>
+      <p class="summary">
+        O front em Angular consome o estado exposto pelo servidor Java e desenha o mapa, os
+        veiculos e os indicadores principais da simulacao.
+      </p>
+    </div>
+
+    <div class="hero-status">
+      <span class="status-pill" [class.running]="state()?.emExecucao">
+        {{ state()?.emExecucao ? 'Executando' : 'Pausado' }}
+      </span>
+      <p>Ciclo atual: <strong>{{ state()?.ciclo ?? 0 }}</strong></p>
+      <p>Atualizacao a cada {{ refreshInterval / 1000 }}s</p>
+    </div>
+  </section>
+
+  <section class="toolbar">
+    <button type="button" (click)="resume()" [disabled]="isBusy() || state()?.emExecucao">
+      Retomar
+    </button>
+    <button type="button" (click)="pause()" [disabled]="isBusy() || !state()?.emExecucao">
+      Pausar
+    </button>
+    <button type="button" (click)="step()" [disabled]="isBusy() || !!state()?.emExecucao">
+      Avancar 1 passo
+    </button>
+    <button type="button" class="secondary" (click)="reset()" [disabled]="isBusy()">
+      Reiniciar
+    </button>
+    <button type="button" class="ghost" (click)="loadState()" [disabled]="isBusy()">
+      Atualizar agora
+    </button>
+  </section>
+
+  @if (errorMessage()) {
+    <section class="alert">
+      <h2>Falha ao conectar</h2>
+      <p>{{ errorMessage() }}</p>
+      <p>Confirme se o back-end Java esta rodando em <code>http://localhost:8080</code>.</p>
+    </section>
+  }
+
+  @if (state(); as currentState) {
+    <section class="dashboard">
+      <article class="panel metrics">
+        <header>
+          <p class="panel-label">Indicadores</p>
+          <h2>Resumo da simulacao</h2>
+        </header>
+
+        <div class="metric-grid">
+          <div class="metric-card car">
+            <span>Carros</span>
+            <strong>{{ currentState.estatisticas.carros }}</strong>
+          </div>
+          <div class="metric-card truck">
+            <span>Caminhoes</span>
+            <strong>{{ currentState.estatisticas.caminhoes }}</strong>
+          </div>
+          <div class="metric-card moto">
+            <span>Motos</span>
+            <strong>{{ currentState.estatisticas.motos }}</strong>
+          </div>
+          <div class="metric-card total">
+            <span>Total</span>
+            <strong>{{ currentState.estatisticas.total }}</strong>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel map-panel">
+        <header>
+          <p class="panel-label">Mapa</p>
+          <h2>Grade {{ currentState.linhas }} x {{ currentState.colunas }}</h2>
+        </header>
+
+        <div
+          class="map-grid"
+          [style.gridTemplateColumns]="'repeat(' + currentState.colunas + ', minmax(0, 1fr))'"
+        >
+          @for (row of currentState.grade; track $index) {
+            @for (cell of row; track $index) {
+              <div class="cell" [class]="'cell ' + cell" [attr.data-cell]="cellSymbol(cell)"></div>
+            }
+          }
+        </div>
+      </article>
+
+      <article class="panel legend">
+        <header>
+          <p class="panel-label">Legenda</p>
+          <h2>Elementos do mundo</h2>
+        </header>
+
+        <div class="legend-list">
+          @for (item of legendItems; track item.type) {
+            <div class="legend-item">
+              <span class="legend-swatch" [class]="'legend-swatch ' + item.type"></span>
+              <div>
+                <strong>{{ item.label }}</strong>
+                <p>{{ item.description }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      </article>
+
+      <article class="panel vehicle-panel">
+        <header>
+          <p class="panel-label">Veiculos</p>
+          <h2>Posicoes atuais</h2>
+        </header>
+
+        <div class="vehicle-list">
+          @for (vehicle of currentState.veiculos; track vehicle.tipo + '-' + vehicle.x + '-' + vehicle.y + '-' + $index) {
+            <div class="vehicle-row">
+              <span class="vehicle-badge" [class]="'vehicle-badge ' + vehicle.tipo">
+                {{ vehicle.tipo }}
+              </span>
+              <span>{{ vehicle.x }}, {{ vehicle.y }}</span>
+              <span>vel. {{ vehicle.velocidade }}</span>
+              <span>{{ vehicle.gerouEmFabrica ? 'ja gerou' : 'livre' }}</span>
+            </div>
+          }
+        </div>
+      </article>
+    </section>
+  } @else {
+    <section class="panel loading-panel">
+      <p>Carregando estado da simulacao...</p>
+    </section>
+  }
+</main>
